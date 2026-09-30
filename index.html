@@ -164,6 +164,23 @@ table.keys th{color:var(--dim);font-size:13px}.kq{font-weight:800}
 .reg{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px 16px}
 .reg .chip{padding:6px 14px}
 .codebig{font-size:clamp(64px,22vw,120px);font-weight:900;letter-spacing:.18em;padding:10px 24px 10px calc(24px + .18em);border-radius:26px;background:var(--panel);border:2px solid var(--line);font-family:ui-monospace,Menlo,monospace;color:#ffc93c}
+/* phone result */
+.rv-emo{font-size:96px;line-height:1.1;animation:boom .7s}
+.rv-name{font-size:clamp(48px,13vw,76px);font-weight:900;color:var(--c);line-height:1.05;animation:boom .6s}
+.rv-sub{font-weight:800;color:var(--dim);font-size:18px}
+.rv-intro{font-size:19px;line-height:1.7;font-weight:600;background:var(--panel);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:16px;padding:16px 18px;text-align:left;width:100%}.rv-intro b{color:var(--c)}
+.rv-box{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:4px 16px}
+.result .pinfo{width:100%;margin-top:0}
+.codewrap{width:100%;display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px;border-radius:22px;border:2px dashed #ffc93c}.codewrap .codebig{font-size:clamp(52px,16vw,90px)}
+/* share + view */
+.shurl{width:100%;height:64px;font-size:12px;background:var(--panel2);color:var(--dim);border:1px solid var(--line);border-radius:12px;padding:10px;resize:none;font-family:ui-monospace,Menlo,monospace}
+.viewwrap{max-width:1100px;margin:0 auto}.viewwrap .map-box{aspect-ratio:1/1;flex:none}@media (orientation:landscape){.viewwrap .map-layout{align-items:flex-start}}
+@media (max-width:600px){.legend{grid-template-columns:1fr!important}}
+.mysel{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.mychem{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px;margin-bottom:26px}
+.mc{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-left:6px solid var(--cc);border-radius:16px;padding:12px 14px;text-align:left}
+.mcn{display:flex;flex-direction:column;min-width:0}.mcn b{font-size:17px}.mcn small{color:var(--dim);font-size:13px}
+.mct{margin-left:auto;text-align:right;font-weight:900;color:var(--cc);font-size:16px;white-space:nowrap}.mct small{display:block;color:var(--dim);font-weight:700;font-size:12px}
 @media (orientation:portrait){.collect{flex-direction:column;align-items:stretch}}
 @media (max-width:600px){.top{padding:12px 16px 6px}.screen{padding:6px 16px 20px}.card{min-height:120px;padding:18px;gap:8px}.card .lab{font-size:36px}.qtext{font-size:22px}.h2{font-size:24px}.big-input{font-size:24px}}
 </style>
@@ -196,10 +213,10 @@ const Q=[
 {p:3,k:'팀원 채용',t:'팀원으로 한 명만 뽑을 수 있다면?',a:'일은 미친 듯이 잘하는데 유머감각 0인 AI형 인재',b:'일은 평균인데 센스 넘치고 팀 분위기 제대로 살리는 인프피/엔티제형 인재',sa:'AI형 인재',sb:'센스 만점 인재',ax:'x',va:1}
 ];
 const T={
-1:{name:'전략적 리더',sub:'스피드 실행러',emo:'🚀',hex:'#ff7a45',core:'확실한 성과, 시원시원한 소통',desc:'일도 확실하게 잘하고 싶고 소통도 시원시원하게 하는 타입.',role:'팀 프로젝트의 총괄 진행자, 워크샵 MC'},
-2:{name:'분위기 메이커',sub:'에너자이저',emo:'🎉',hex:'#ffc93c',core:'유쾌함, 분위기 유연성',desc:'분위기와 조화를 최우선으로 생각하며 팀의 사기를 올려주는 에너자이저.',role:'워크샵 회식 DJ, 신규 입사자 멘토'},
-3:{name:'평화주의 힐러',sub:'오아시스',emo:'🌿',hex:'#3ddc97',core:'갈등 방지, 자기 페이스',desc:'묵묵히 팀을 받쳐주며 무리한 갈등을 싫어하는 평화적인 스타일.',role:'팀 내 의견 조정자, 서포터'},
-4:{name:'묵묵한 전문가',sub:'마이웨이 뇌섹남',emo:'🛠️',hex:'#6c8cff',core:'높은 완성도, 조용한 해결사',desc:'불필요한 소음 없이 맡은 바 일을 높은 완성도로 끝내는 장인 타입.',role:'핵심 보고서 작성, 데이터 및 시스템 관리'}
+1:{name:'탱커',intro:'앞장서서 길을 여는 <b>탱커</b>! 팀이 망설일 때 가장 먼저 나서서 방향을 잡고 일을 밀어붙이는군요. 프로젝트 총괄이나 워크샵 MC 자리가 딱 어울려요.',sub:'스피드 실행러',emo:'🚀',hex:'#ff7a45',core:'확실한 성과, 시원시원한 소통',desc:'일도 확실하게 잘하고 싶고 소통도 시원시원하게 하는 타입.',role:'팀 프로젝트의 총괄 진행자, 워크샵 MC'},
+2:{name:'힐러',intro:'팀의 사기를 채워 주는 <b>힐러</b>! 처진 분위기도 한마디로 살려 내고 모두가 편하게 어울리도록 만드는군요. 회식 DJ나 신규 입사자 멘토가 찰떡이에요.',sub:'에너자이저',emo:'🎉',hex:'#ffc93c',core:'유쾌함, 분위기 유연성',desc:'분위기와 조화를 최우선으로 생각하며 팀의 사기를 올려주는 에너자이저.',role:'워크샵 회식 DJ, 신규 입사자 멘토'},
+3:{name:'서포터',intro:'조용히 팀을 받쳐 주는 <b>서포터</b>! 갈등이 커지기 전에 먼저 알아채고 모두의 페이스를 지켜 주는군요. 팀의 의견 조정자이자 든든한 뒷받침 역할이 잘 어울려요.',sub:'오아시스',emo:'🌿',hex:'#3ddc97',core:'갈등 방지, 자기 페이스',desc:'묵묵히 팀을 받쳐주며 무리한 갈등을 싫어하는 평화적인 스타일.',role:'팀 내 의견 조정자, 서포터'},
+4:{name:'딜러',intro:'확실하게 결과를 내는 <b>딜러</b>! 소음 없이 맡은 일을 높은 완성도로 끝내 버리는군요. 핵심 보고서 작성과 데이터·시스템 관리에서 진가를 발휘해요.',sub:'마이웨이 뇌섹남',emo:'🛠️',hex:'#6c8cff',core:'높은 완성도, 조용한 해결사',desc:'불필요한 소음 없이 맡은 바 일을 높은 완성도로 끝내는 장인 타입.',role:'핵심 보고서 작성, 데이터 및 시스템 관리'}
 };
 const CHEM={
 combo:{emo:'⚡',title:'환상의 콤비',tag:'우린 만나면 무적',line:'일도 신속하게, 노는 것도 확실하게! 팀의 추진 엔진과 웃음 버튼',desc:['한 명은 확실한 추진력과 과업 중심의 결단력을 제공하고, 다른 한 명은 긴장된 분위기를 풀어주고 팀의 사기를 올려줍니다.','일할 때는 빠르고 확실하게 치고 나가며, 쉴 때는 팀 전체의 흥을 담당하는 최고의 프로젝트 짝꿍입니다.'],keys:[11,6,4],c:'#ffc93c'},
@@ -214,9 +231,18 @@ const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(M
 const rnd=a=>a[Math.floor(Math.random()*a.length)];
 let people=[],photos={};
 /* 휴대폰 응답 모드: ?m=phone 으로 열면 12문항만 풀고 결과 코드를 보여줌 */
-const PHONE=new URLSearchParams(location.search).get('m')==='phone';
+const MODE=new URLSearchParams(location.search).get('m');
+const PHONE=MODE==='phone';
+/* 공유 보기 모드: ?m=view#d=... 로 열면 성향 지도 + 케미 매칭만 조회 */
+const VIEW=MODE==='view';
 const PAGES_URL='https://hj9610bae.github.io/test/';
-const phoneUrl=()=>(/^https?:$/.test(location.protocol)?location.origin+location.pathname:PAGES_URL)+'?m=phone';
+const baseUrl=()=>/^https?:$/.test(location.protocol)?location.origin+location.pathname:PAGES_URL;
+const phoneUrl=()=>baseUrl()+'?m=phone';
+/* 공유 링크 데이터: "1~이름.코드|이름.코드" 를 UTF-8 base64url 로 (사진 제외) */
+function packPeople(){const bytes=new TextEncoder().encode('1~'+people.map(p=>p.name.replace(/[|]/g,'')+'.'+encodeCode(p.answers)).join('|'));let bin='';bytes.forEach(b=>bin+=String.fromCharCode(b));return btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function unpackPeople(d){try{const bin=atob(d.replace(/-/g,'+').replace(/_/g,'/'));const s=new TextDecoder().decode(Uint8Array.from(bin,c=>c.charCodeAt(0)));if(!s.startsWith('1~'))return[];
+return s.slice(2).split('|').map((x,i)=>{const j=x.lastIndexOf('.'),ans=j>0&&decodeCode(x.slice(j+1));return ans?{id:'v'+i,name:x.slice(0,j),answers:ans,ts:i,ph:false}:null}).filter(Boolean)}catch(e){return[]}}
+const shareUrl=()=>baseUrl()+'?m=view#d='+packPeople();
 /* 결과 코드: 12문항(12비트) + 체크 3비트를 섞어서 3글자로. 헷갈리는 0·1·I·O 제외 */
 const ALPH='23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
 function codeOfBits(b){let n=b*8+(Math.imul(b+1,0x9E3779B1)>>>29);n=(n*7919+12345)&32767;return ALPH[n>>10]+ALPH[(n>>5)&31]+ALPH[n&31]}
@@ -225,7 +251,7 @@ const CODEMAP={};for(let b=0;b<4096;b++)CODEMAP[codeOfBits(b)]=b;
 function decodeCode(c){const b=CODEMAP[c];if(b===undefined)return null;return Q.map((_,i)=>(b>>(11-i))&1?'A':'B')}
 const normCode=v=>v.toUpperCase().replace(/\s/g,'').slice(0,3);
 const C={name:'',code:'',photo:null};
-const S={screen:'home'};let R=null;const P={i:0,t:{}};const M={order:[],n:0,last:null};const CH={a:'',b:''};let busy=false;
+const S={screen:'home'};let R=null;const P={i:0,t:{}};const M={order:[],n:0,last:null};const CH={a:'',b:'',me:''};let busy=false;
 
 function score(ans){let x=0,y=0;Q.forEach((q,i)=>{const v=ans[i]==='A'?q.va:-q.va;if(q.ax==='x')x+=v;else y+=v});return{x,y}}
 function quad(p){const {x,y}=score(p.answers);const sx=x!==0?Math.sign(x):(p.answers[11]==='A'?1:-1);const sy=y!==0?Math.sign(y):(p.answers[6]==='A'?1:-1);return sx>0?(sy>0?1:4):(sy>0?2:3)}
@@ -237,7 +263,7 @@ function chips(list){return list.map(p=>`<span class="chip">${avatar(p)}${esc(p.
 /* storage */
 const LS={async get(k){const v=localStorage.getItem(k);return v==null?null:{value:v}},async set(k,v){localStorage.setItem(k,v)},async delete(k){localStorage.removeItem(k)}};
 const store=(()=>{if(window.storage&&typeof window.storage.get==='function')return window.storage;try{const t='__wk_t';localStorage.setItem(t,'1');localStorage.removeItem(t);return LS}catch(e){return null}})();
-const hasStore=()=>!PHONE&&!!store;
+const hasStore=()=>!PHONE&&!VIEW&&!!store;
 async function load(){if(!hasStore())return;try{const r=await store.get('wk-people',false);if(r&&r.value)people=JSON.parse(r.value)}catch(e){}
 await Promise.all(people.filter(p=>p.ph).map(async p=>{try{const r=await store.get('wk-photo:'+p.id,false);if(r&&r.value)photos[p.id]=r.value}catch(e){}}))}
 async function savePeople(){if(!hasStore())return;try{await store.set('wk-people',JSON.stringify(people),false)}catch(e){toast('⚠️ 저장 실패 — 창을 닫으면 데이터가 사라질 수 있어요')}}
@@ -251,11 +277,12 @@ function modal(h){$('#mbox').innerHTML=h;$('#ov').classList.remove('hidden')}
 function closeM(){$('#ov').classList.add('hidden');clearTimeout(slotTimer)}
 function confirmM(msg,ok,fn,danger){modal(`<div class="cf"><p>${msg}</p><div class="row"><button class="btn" onclick="closeM()">취소</button><button class="btn ${danger?'danger':'hi'}" id="cfok">${ok}</button></div></div>`);$('#cfok').onclick=()=>{closeM();fn()}}
 function slot(frame,final){clearTimeout(slotTimer);modal(`<div class="slot" id="slot"></div><div id="slotx"></div>`);let d=45,n=0;const step=()=>{const el=$('#slot');if(!el||$('#ov').classList.contains('hidden'))return;el.innerHTML=frame();n++;d*=1.085;if(n<20)slotTimer=setTimeout(step,d);else final()};step()}
-function topBar(title,back){if(PHONE)return `<div class="top"><div class="title">${title}</div></div>`;return `<div class="top"><button class="back" onclick="${back||"go('home')"}">← 홈</button><div class="title">${title}</div><div class="pc">👥 ${people.length}명</div></div>`}
-function go(s){closeM();if(PHONE)s='respond';S.screen=s;if(s==='respond')R={step:'name',name:'',photo:null,answers:[],i:0,replaceId:null};if(s==='map')syncMap();render()}
+function topBar(title,back){if(PHONE||VIEW)return `<div class="top"><div class="title">${title}</div></div>`;return `<div class="top"><button class="back" onclick="${back||"go('home')"}">← 홈</button><div class="title">${title}</div><div class="pc">👥 ${people.length}명</div></div>`}
+function go(s){closeM();if(PHONE)s='respond';if(VIEW)s='view';S.screen=s;if(s==='respond')R={step:'name',name:'',photo:null,answers:[],i:0,replaceId:null};if(s==='map')syncMap();render()}
 
-function render(){let h='';switch(S.screen){case'home':h=vHome();break;case'respond':h=vRespond();break;case'collect':h=vCollect();break;case'play':h=vPlay();break;case'map':h=vMap();break;case'chem':h=vChem();break;case'manage':h=vManage();break}
-$('#app').innerHTML=h;const nm=$('#nm');if(nm)nm.value=R.name;const cn=$('#cn');if(cn)cn.value=C.name;const cc=$('#cc');if(cc)cc.value=C.code}
+let lastScr=null;
+function render(){const old=$('.screen'),keep=old&&lastScr===S.screen?old.scrollTop:0;let h='';switch(S.screen){case'view':h=vView();break;case'home':h=vHome();break;case'respond':h=vRespond();break;case'collect':h=vCollect();break;case'play':h=vPlay();break;case'map':h=vMap();break;case'chem':h=vChem();break;case'manage':h=vManage();break}
+$('#app').innerHTML=h;const nm=$('#nm');if(nm)nm.value=R.name;const cn=$('#cn');if(cn)cn.value=C.name;const cc=$('#cc');if(cc)cc.value=C.code;lastScr=S.screen;const sc=$('.screen');if(sc&&keep)sc.scrollTop=keep}
 
 /* HOME */
 function vHome(){const tiles=[
@@ -275,7 +302,7 @@ if(R.step==='name')return topBar('✍️ 개인 응답','quitR()')+`<div class="
 <input id="nm" class="big-input" placeholder="예: 김부여" maxlength="12" autocomplete="off" oninput="R.name=this.value" onkeydown="if(event.key==='Enter'){this.blur();startQ()}">
 ${PHONE?'':`<label class="photo-btn">${R.photo?`<img src="${R.photo}">`:'<span class="ph0">📷</span>'}<span>${R.photo?'사진 다시 찍기':'셀카 찍기 (선택)<br><small>성향 지도에 얼굴로 표시돼요</small>'}</span><input type="file" accept="image/*" capture="user" style="display:none" onchange="onPhoto(this)"></label>`}
 <button class="primary" onclick="startQ()">12문항 시작하기 →</button>
-<p class="hint">🤫 다른 사람이 보지 않게 혼자 답해 주세요<br>${PHONE?'끝나면 나오는 3글자 코드를 진행자에게 알려 주세요':'결과는 발표 시간에 한꺼번에 공개됩니다'}</p></div></div>`;
+<p class="hint">🤫 다른 사람이 보지 않게 혼자 답해 주세요<br>${PHONE?'끝나면 내 성향이 공개되고, 3글자 코드를 진행자에게 알려 주면 돼요':'결과는 발표 시간에 한꺼번에 공개됩니다'}</p></div></div>`;
 if(R.step==='q'){const q=Q[R.i],sel=R.answers[R.i];const cls=k=>sel?(sel===k?'sel':'dim'):'';
 return topBar('✍️ '+esc(R.name)+'님 응답 중','quitR()')+`<div class="screen"><div class="qwrap">
 <div class="qmeta"><span class="part">PART ${q.p+1} · ${PARTS[q.p]}</span><span>${R.i+1} / 12</span></div>
@@ -283,8 +310,20 @@ return topBar('✍️ '+esc(R.name)+'님 응답 중','quitR()')+`<div class="scr
 <h2 class="qtext">Q${R.i+1}. ${esc(q.t)}</h2>
 <div class="ab"><button class="card A ${cls('A')}" onclick="answer('A')"><span class="lab">A</span><span class="txt">${esc(q.a)}</span></button><div class="vs">VS</div><button class="card B ${cls('B')}" onclick="answer('B')"><span class="lab">B</span><span class="txt">${esc(q.b)}</span></button></div>
 <div class="qnav"><button class="btn" onclick="prevQ()" ${R.i===0?'disabled':''}>← 이전 문항</button><button class="btn" onclick="quitR()">그만두기</button></div></div></div>`}
-if(R.step==='code')return topBar('🏯 부여 워크샵 밸런스 게임')+`<div class="screen"><div class="center-col"><div class="step-emoji big">🎉</div><h2 class="h2">${esc(R.name)}님, 응답 완료!</h2><p class="hint" style="font-size:18px">아래 코드를 진행자에게 보여 주세요</p><div class="codebig">${R.code}</div><p class="hint">코드에는 결과가 숨겨져 있어서 봐도 알 수 없어요 🤫<br>성향은 지도 발표 때 공개됩니다</p><button class="btn" onclick="redoPhone()">처음부터 다시 응답하기</button></div></div>`;
+if(R.step==='reveal')return topBar('🏯 부여 워크샵 밸런스 게임')+`<div class="screen"><div class="center-col"><p class="hint" style="font-size:22px;margin-top:10vh">${esc(R.name)}님의 성향은...</p><div class="slot" id="rv"></div></div></div>`;
+if(R.step==='code')return vPhoneResult();
 return topBar('✍️ 개인 응답')+`<div class="screen"><div class="center-col"><div class="step-emoji big">🎉</div><h2 class="h2">${esc(R.name)}님, 제출 완료!</h2><p class="hint" style="font-size:18px">결과는 성향 지도 발표 때 공개됩니다.<br>아이패드를 다음 분께 넘겨주세요 🙌</p><div class="row"><button class="primary" onclick="go('respond')">다음 사람 시작 →</button><button class="btn" onclick="go('home')">홈으로</button></div><p class="hint">지금까지 ${people.length}명 응답</p></div></div>`}
+function runReveal(){let d=70,n=0;const step=()=>{const el=$('#rv');if(!el||R.step!=='reveal')return;const t=T[n%4+1];el.innerHTML=`${t.emo} ${t.name}`;el.style.color=t.hex;n++;d*=1.1;if(n<18)setTimeout(step,d);else setTimeout(()=>{R.step='code';render()},350)};step()}
+function vPhoneResult(){const ans=R.answers.length===12?R.answers:decodeCode(R.code);if(!ans){R.step='name';return vRespond()}
+const k=quad({answers:ans}),t=T[k],sc=score(ans);
+const chem=[1,2,3,4].filter(o=>o!==k&&CHEM[chemKey(k,o)]).map(o=>{const c=CHEM[chemKey(k,o)];return `<div style="margin-top:4px">${c.emo} <b style="color:${c.c};margin:0">${c.title}</b> · ${T[o].emo} ${T[o].name}</div>`}).join('');
+return topBar('🏯 부여 워크샵 밸런스 게임')+`<div class="screen"><div class="center-col result" style="--c:${t.hex}">
+<p class="hint" style="font-size:18px">${esc(R.name)}님은...</p><div class="rv-emo">${t.emo}</div><div class="rv-name">${t.name}</div><div class="rv-sub">${k}분면 · ${t.sub}</div>
+<p class="rv-intro">당신은 ${t.intro}</p>
+<div class="rv-box">${axisBar('X축 · 업무 성향',sc.x,'유연·관계','원칙·과업')}${axisBar('Y축 · 소통 성향',sc.y,'신중·독립','적극·표현')}</div>
+<div class="pinfo"><b>핵심</b>${t.core}</div><div class="pinfo"><b>특징</b>${t.desc}</div><div class="pinfo"><b>추천 역할</b>${t.role}</div><div class="pinfo"><b>케미 궁합</b>${chem}</div>
+<div class="codewrap"><p class="hint" style="font-size:17px">📣 진행자에게 이 코드를 알려 주세요</p><div class="codebig">${R.code}</div><p class="dimtxt">코드만 봐서는 다른 사람이 결과를 알 수 없어요 🤫</p></div>
+<button class="btn" onclick="redoPhone()">처음부터 다시 응답하기</button></div></div>`}
 function onPhoto(inp){const f=inp.files&&inp.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{const s=Math.min(img.width,img.height);const cv=document.createElement('canvas');cv.width=cv.height=160;cv.getContext('2d').drawImage(img,(img.width-s)/2,(img.height-s)/2,s,s,0,0,160,160);(S.screen==='collect'?C:R).photo=cv.toDataURL('image/jpeg',.75);render()};img.src=rd.result};rd.readAsDataURL(f)}
 function startQ(){const n=(R.name||'').trim();if(!n){toast('이름을 입력해 주세요 ✍️');return}R.name=n;const ex=people.find(p=>p.name===n);
 if(ex){confirmM(`<b>'${esc(n)}'</b> 이름으로 이미 응답했어요.<br>새 응답으로 덮어쓸까요?`,'덮어쓰기',()=>{R.replaceId=ex.id;R.step='q';R.i=0;render()});return}R.step='q';R.i=0;render()}
@@ -294,11 +333,11 @@ function quitR(){if(R.step==='q'&&R.answers.length){confirmM('응답을 그만�
 function redoPhone(){confirmM('처음부터 다시 응답할까요?<br><small class="hint">새 코드가 나오면 진행자에게 다시 알려 주세요.</small>','다시 하기',()=>{try{localStorage.removeItem('wk-mycode')}catch(e){}go('respond')})}
 function addPerson(name,answers,photo,replaceId){const id=replaceId||uid();const old=byId(id);const p={id,name,answers:answers.slice(),ts:Date.now(),ph:!!(photo||(old&&old.ph))};
 if(old)people[people.indexOf(old)]=p;else people.push(p);if(photo){photos[id]=photo;savePhoto(id,photo)}savePeople()}
-function finishR(){if(PHONE){R.code=encodeCode(R.answers);R.step='code';try{localStorage.setItem('wk-mycode',JSON.stringify({name:R.name,code:R.code}))}catch(e){}render();return}
+function finishR(){if(PHONE){R.code=encodeCode(R.answers);R.step='reveal';try{localStorage.setItem('wk-mycode',JSON.stringify({name:R.name,code:R.code}))}catch(e){}render();runReveal();return}
 addPerson(R.name,R.answers,R.photo,R.replaceId);R.step='done';render()}
 
 /* COLLECT (휴대폰 코드 등록) */
-function qrSVG(text){try{const qr=qrcode(0,'M');qr.addData(text);qr.make();const n=qr.getModuleCount();let d='';for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(qr.isDark(r,c))d+=`M${c} ${r}h1v1h-1z`;
+function qrSVG(text,ecl){try{const qr=qrcode(0,ecl||'M');qr.addData(text);qr.make();const n=qr.getModuleCount();let d='';for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(qr.isDark(r,c))d+=`M${c} ${r}h1v1h-1z`;
 return `<svg viewBox="-2 -2 ${n+4} ${n+4}" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect x="-2" y="-2" width="${n+4}" height="${n+4}" fill="#fff"/><path d="${d}" fill="#000"/></svg>`}catch(e){return '<p style="color:#16132a;padding:20px">QR을 만들 수 없어요.<br>아래 주소를 직접 입력해 주세요.</p>'}}
 function vCollect(){const url=phoneUrl();const list=people.slice().sort((a,b)=>b.ts-a.ts);
 return topBar('📱 휴대폰 응답 받기')+`<div class="screen"><div class="collect">
@@ -314,6 +353,12 @@ function addCode(){const n=(C.name||'').trim(),code=normCode(C.code||'');if(!n){
 const ans=decodeCode(code);if(!ans){toast('코드를 다시 확인해 주세요 🔍<br><small>3글자 · 0, 1, I, O는 쓰이지 않아요</small>',3000);return}
 const done=replaceId=>{addPerson(n,ans,C.photo,replaceId);C.name='';C.code='';C.photo=null;render();toast(`✅ <b>${esc(n)}</b> 등록 완료 (${people.length}명)`)};
 const ex=people.find(p=>p.name===n);if(ex){confirmM(`<b>'${esc(n)}'</b> 이름으로 이미 등록돼 있어요.<br>새 코드로 덮어쓸까요?`,'덮어쓰기',()=>done(ex.id));return}done()}
+
+/* VIEW (공유 링크: 성향 지도 + 케미 매칭 조회 전용) */
+function vView(){if(!people.length)return topBar('🏯 우리 팀 성향 지도')+`<div class="screen"><div class="center-col"><div class="step-emoji">🔗</div><h2 class="h2">링크가 올바르지 않아요</h2><p class="hint">진행자에게 공유 링크를 다시 받아 주세요.</p></div></div>`;
+return topBar('🏯 부여 워크샵 · 우리 팀 성향 지도')+`<div class="screen"><div class="viewwrap">
+<div class="map-layout"><div class="map-main"><div class="map-box">${mapSVG(people)}</div><p class="dimtxt" style="text-align:center">👆 이름을 누르면 성향 카드가 열려요 · 총 ${people.length}명</p></div><div class="legend">${[1,2,3,4].map(k=>legendCard(k,people)).join('')}</div></div>
+<div id="chemsec" class="chem-wrap" style="margin-top:36px"><h2 class="h2" style="margin-bottom:18px">💞 케미 매칭</h2>${people.length<2?'<p class="hint">2명 이상일 때 볼 수 있어요.</p>':chemBody()}</div></div></div>`}
 
 /* PLAY */
 function pcard(k,txt,n,side){const l=k.toLowerCase();return `<div class="card ${k}"><span class="lab">${k}</span><span class="txt">${esc(txt)}</span><span class="side">${side}</span><div class="tally"><button onclick="tally('${l}',-1)">−</button><span>${n}<small>명</small></span><button onclick="tally('${l}',1)">+</button></div></div>`}
@@ -359,11 +404,18 @@ if(!vis.length)s+=`<rect x="190" y="430" width="420" height="56" rx="16" fill="#
 return s+'</svg>'}
 function vMap(){if(!people.length)return topBar('🗺️ 우리 팀 성향 지도')+`<div class="screen"><div class="center-col"><div class="step-emoji">🗺️</div><h2 class="h2">아직 응답이 없어요</h2><p class="hint">개인 응답을 먼저 받아 주세요.</p><button class="primary" onclick="go('respond')">✍️ 개인 응답 시작</button></div></div>`;
 const shown=new Set(M.order.slice(0,M.n));const vis=people.filter(p=>shown.has(p.id));
-return topBar('🗺️ 우리 팀 성향 지도')+`<div class="screen mapscr"><div class="map-layout"><div class="map-main"><div class="map-ctrl"><button class="primary sm" onclick="revealNext()" ${M.n>=M.order.length?'disabled':''}>🎲 한 명씩 공개<span class="cnt">${M.n}/${M.order.length}</span></button><button class="btn" onclick="revealAll()">전체 공개</button><button class="btn" onclick="hideAll()">숨기기</button></div>
+return topBar('🗺️ 우리 팀 성향 지도')+`<div class="screen mapscr"><div class="map-layout"><div class="map-main"><div class="map-ctrl"><button class="primary sm" onclick="revealNext()" ${M.n>=M.order.length?'disabled':''}>🎲 한 명씩 공개<span class="cnt">${M.n}/${M.order.length}</span></button><button class="btn" onclick="revealAll()">전체 공개</button><button class="btn" onclick="hideAll()">숨기기</button>${M.n>=M.order.length?'<button class="btn hi" onclick="shareMap()">🔗 팀원들에게 공유</button>':''}</div>
 <div class="map-box">${mapSVG(vis)}</div></div><div class="legend">${[1,2,3,4].map(k=>legendCard(k,vis)).join('')}</div></div></div>`}
 function legendCard(k,vis){const mem=vis.filter(p=>quad(p)===k),t=T[k];return `<button class="tcard" style="--c:${t.hex}" onclick="typeCard(${k})"><div class="th"><span class="te">${t.emo}</span><div><div class="tn">${t.name}</div><div class="ts">${k}분면 · ${t.sub}</div></div><div class="tc">${mem.length}</div></div><div class="tchips">${mem.map(p=>esc(p.name)).join(' · ')||'<span class="dimtxt">—</span>'}</div></button>`}
 function revealNext(){if(M.n>=M.order.length)return;M.n++;M.last=M.order[M.n-1];render();const p=byId(M.last),t=T[quad(p)];toast(`<span style="color:${t.hex}">${t.emo}</span> <b>${esc(p.name)}</b> → <span style="color:${t.hex}">${t.name}</span>`,2600)}
-function revealAll(){M.n=M.order.length;M.last=null;render()}
+function revealAll(){M.n=M.order.length;M.last=null;render();toast('🔗 이제 <b>팀원들에게 공유</b>할 수 있어요')}
+function shareMap(){if(!people.length)return;const url=shareUrl();
+modal(`<div class="cf"><h3 class="mh">🔗 팀원들에게 공유</h3><p class="hint">이 링크로 누구나 <b>성향 지도</b>와 <b>케미 매칭</b>을 볼 수 있어요<br><small>지금 등록된 ${people.length}명 기준 · 사진은 포함되지 않아요</small></p>
+<div class="qr" style="margin:16px auto;max-width:300px">${qrSVG(url,'L')}</div><textarea id="shurl" class="shurl" readonly>${esc(url)}</textarea>
+<div class="row">${navigator.share?'<button class="btn hi" onclick="nativeShare()">📤 공유하기</button>':''}<button class="btn hi" onclick="copyLink()">📋 링크 복사</button><button class="btn" onclick="closeM()">닫기</button></div></div>`)}
+function copyLink(){const t=$('#shurl'),url=t.value,ok=()=>toast('📋 링크를 복사했어요');const fb=()=>{t.focus();t.select();t.setSelectionRange(0,url.length);let r=false;try{r=document.execCommand('copy')}catch(e){}r?ok():toast('링크를 길게 눌러 복사해 주세요')};
+if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(url).then(ok,fb);else fb()}
+function nativeShare(){navigator.share({title:'우리 팀 성향 지도',text:'🏯 부여 워크샵 · 우리 팀 성향 지도와 케미를 확인해 보세요!',url:$('#shurl').value}).catch(()=>{})}
 function hideAll(){M.n=0;M.last=null;render()}
 function typeCard(k){const t=T[k];const shown=new Set(M.order.slice(0,M.n));const mem=people.filter(p=>shown.has(p.id)&&quad(p)===k);
 modal(`<div class="pcard" style="--c:${t.hex}"><div class="ce">${t.emo}</div><div class="pname" style="color:${t.hex}">${t.name}</div><div class="ptype"><small>${k}분면 · ${t.sub}</small></div><div class="pinfo"><b>핵심</b>${t.core}</div><div class="pinfo"><b>특징</b>${t.desc}</div><div class="pinfo"><b>추천 역할</b>${t.role}</div><div style="margin-top:14px">${chips(mem)}</div><button class="btn full" onclick="closeM()">닫기</button></div>`)}
@@ -372,22 +424,29 @@ function personCard(id){const p=byId(id);if(!p)return;const sc=score(p.answers),
 modal(`<div class="pcard" style="--c:${t.hex}"><div class="pav">${avatar(p,100)}</div><div class="pname">${esc(p.name)}</div><div class="ptype">${t.emo} ${t.name} <small>${t.sub}</small></div>
 ${axisBar('X축 · 업무 성향',sc.x,'유연·관계','원칙·과업')}${axisBar('Y축 · 소통 성향',sc.y,'신중·독립','적극·표현')}
 <div class="pinfo"><b>특징</b>${t.desc}</div><div class="pinfo"><b>추천 역할</b>${t.role}</div>
-<div class="row"><button class="btn hi" onclick="CH.a='${id}';CH.b='';go('chem')">💞 케미 찾기</button><button class="btn" onclick="closeM()">닫기</button></div></div>`)}
+<div class="row"><button class="btn hi" onclick="meChem('${id}')">💞 케미 찾기</button><button class="btn" onclick="closeM()">닫기</button></div></div>`)}
 
 /* CHEM */
 function chemKey(a,b){const k=[a,b].sort().join('');return k==='12'?'combo':(k==='13'||k==='24')?'bomb':k==='34'?'zone':'none'}
 function vChem(){if(people.length<2)return topBar('💞 케미 매칭')+`<div class="screen"><div class="center-col"><div class="step-emoji">💞</div><h2 class="h2">응답이 2명 이상 필요해요</h2><button class="primary" onclick="go('respond')">✍️ 개인 응답 시작</button></div></div>`;
-const opts=sel=>`<option value="">선택</option>`+people.map(p=>`<option value="${p.id}" ${sel===p.id?'selected':''}>${esc(p.name)}</option>`).join('');
-return topBar('💞 케미 매칭')+`<div class="screen"><div class="chem-wrap"><div class="chem-top"><button class="primary" onclick="randomChem()">🎰 랜덤 케미 뽑기</button>
-<div class="pairsel"><select onchange="CH.a=this.value">${opts(CH.a)}</select><span class="cx">💞</span><select onchange="CH.b=this.value">${opts(CH.b)}</select><button class="btn hi" onclick="checkChem()">케미 확인</button></div></div>
-<h3 class="sec">📋 케미 지도 <small>분면 조합별 자동 매칭</small></h3>${cgroup('combo',[[1,2]])}${cgroup('bomb',[[1,3],[4,2]])}${cgroup('zone',[[3,4]])}</div></div>`}
+return topBar('💞 케미 매칭')+`<div class="screen"><div class="chem-wrap">${chemBody()}</div></div>`}
+function chemBody(){const opts=(sel,ph)=>`<option value="">${ph||'선택'}</option>`+people.map(p=>`<option value="${p.id}" ${sel===p.id?'selected':''}>${esc(p.name)}</option>`).join('');
+return `<h3 class="sec">🙋 나의 케미 <small>내 이름을 고르면 모든 팀원과의 케미가 나와요</small></h3>
+<div class="mysel"><select onchange="CH.me=this.value;render()">${opts(CH.me,'내 이름 선택')}</select>${CH.me?'<span class="dimtxt">카드를 누르면 자세히 볼 수 있어요</span>':''}</div>${CH.me?myChem(CH.me):''}
+<h3 class="sec">🔍 두 사람 케미 확인</h3><div class="chem-top"><div class="pairsel"><select onchange="CH.a=this.value">${opts(CH.a)}</select><span class="cx">💞</span><select onchange="CH.b=this.value">${opts(CH.b)}</select><button class="btn hi" onclick="checkChem()">케미 확인</button></div><button class="primary sm" onclick="randomChem()">🎰 랜덤 케미 뽑기</button></div>
+<h3 class="sec">📋 케미 지도 <small>분면 조합별 자동 매칭</small></h3>${cgroup('combo',[[1,2]])}${cgroup('bomb',[[1,3],[4,2]])}${cgroup('zone',[[3,4]])}`}
+function chemInfo(k1,k2){const c=CHEM[chemKey(k1,k2)];if(c)return c;return k1===k2?{emo:'🪞',title:'닮은꼴 케미',tag:'같은 분면에서 만난 사이',line:`둘 다 ${T[k1].name}! 생각하는 방식이 비슷해서 말이 잘 통하는 사이`,desc:[],keys:null,c:T[k1].hex}:{emo:'🤝',title:'알아가는 사이',tag:'정해진 공식이 없는 조합',line:'특별한 케미 공식은 없지만, 오늘 워크샵에서 알아가면 되는 사이',desc:[],keys:null,c:'#b9a8ff'}}
+function myChem(id){const me=byId(id);if(!me)return'';const km=quad(me);
+const rows=people.filter(p=>p.id!==id).map(p=>({p,c:chemInfo(km,quad(p)),same:me.answers.filter((v,i)=>v===p.answers[i]).length})).sort((a,b)=>b.same-a.same);
+return `<div class="mychem">${rows.map(({p,c,same})=>{const t=T[quad(p)];return `<button class="mc" style="--cc:${c.c}" onclick="showChem('${id}','${p.id}')">${avatar(p)}<div class="mcn"><b>${esc(p.name)}</b><small>${t.emo} ${t.name}</small></div><div class="mct">${c.emo} ${c.title}<small>싱크로율 ${Math.round(same/12*100)}%</small></div></button>`}).join('')}</div>`}
+function meChem(id){CH.me=id;CH.a=id;CH.b='';if(VIEW){closeM();render();const el=$('#chemsec');if(el)el.scrollIntoView({behavior:'smooth'})}else go('chem')}
 function cgroup(key,pairs){const c=CHEM[key],bq=k=>people.filter(p=>quad(p)===k);return `<div class="cgroup" style="--cc:${c.c}"><h3>${c.emo} ${c.title}</h3><div class="tg">"${c.tag}" — ${c.line}</div>${pairs.map(([a,b])=>`<div class="crow"><div class="cside"><div class="lbl">${T[a].emo} ${T[a].name}</div>${chips(bq(a))}</div><div class="cx">×</div><div class="cside"><div class="lbl">${T[b].emo} ${T[b].name}</div>${chips(bq(b))}</div></div>`).join('')}</div>`}
 function checkChem(){if(!CH.a||!CH.b){toast('두 사람을 골라주세요');return}if(CH.a===CH.b){toast('서로 다른 두 사람을 골라주세요');return}showChem(CH.a,CH.b)}
 function randomChem(){if(people.length<2){toast('응답이 2명 이상 필요해요');return}const two=()=>shuffle(people).slice(0,2);
 slot(()=>{const [a,b]=two();return `<span style="font-size:.6em">${esc(a.name)} × ${esc(b.name)}</span>`},()=>{const [a,b]=two();showChem(a.id,b.id)})}
 function pm(p){const t=T[quad(p)];return `<div class="pm">${avatar(p,78)}<div>${esc(p.name)}</div><small style="color:${t.hex}">${t.emo} ${t.name}</small></div>`}
-function showChem(a,b){const p1=byId(a),p2=byId(b);if(!p1||!p2)return;const k1=quad(p1),k2=quad(p2),key=chemKey(k1,k2);
-let c=CHEM[key];if(!c)c=k1===k2?{emo:'🪞',title:'닮은꼴 케미',tag:'같은 분면에서 만난 사이',line:`둘 다 ${T[k1].name}! 생각하는 방식이 비슷해서 말이 잘 통하는 사이`,desc:[],keys:null,c:T[k1].hex}:{emo:'🤝',title:'알아가는 사이',tag:'정해진 공식이 없는 조합',line:'특별한 케미 공식은 없지만, 오늘 워크샵에서 알아가면 되는 사이',desc:[],keys:null,c:'#b9a8ff'};
+function showChem(a,b){const p1=byId(a),p2=byId(b);if(!p1||!p2)return;const k1=quad(p1),k2=quad(p2);
+const c=chemInfo(k1,k2);
 const same=p1.answers.filter((v,i)=>v===p2.answers[i]).length;let keys=c.keys;
 if(!keys){const diff=Q.map((_,i)=>i).filter(i=>p1.answers[i]!==p2.answers[i]);keys=(diff.length?diff:[0,1,2]).slice(0,3)}
 const rows=keys.map(i=>{const q=Q[i],v1=p1.answers[i],v2=p2.answers[i];return `<tr><td class="kq">Q${i+1} ${q.k}</td><td><span class="ch ${v1}">${v1}</span>${v1==='A'?q.sa:q.sb}</td><td><span class="ch ${v2}">${v2}</span>${v2==='A'?q.sa:q.sb}</td><td>${v1===v2?'🤝':'⚡'}</td></tr>`}).join('');
@@ -409,6 +468,7 @@ function delP(id){const p=byId(id);confirmM(`<b>${esc(p.name)}</b>님의 응답�
 function clearAll(){confirmM('모든 응답을 삭제할까요?<br><small class="hint">되돌릴 수 없어요.</small>','전체 삭제',()=>{people.forEach(p=>{if(p.ph)delPhoto(p.id)});people=[];photos={};M.order=[];M.n=0;M.last=null;P.t={};P.i=0;savePeople();render();toast('🗑️ 전체 삭제 완료')},true)}
 
 if(PHONE){S.screen='respond';R={step:'name',name:'',photo:null,answers:[],i:0,replaceId:null};try{const m=JSON.parse(localStorage.getItem('wk-mycode')||'null');if(m&&m.code){R.name=m.name;R.code=m.code;R.step='code'}}catch(e){}render()}
+else if(VIEW){const m=(location.hash.match(/d=([^&]+)/)||location.search.match(/[?&]d=([^&]+)/)||[])[1];people=m?unpackPeople(m):[];M.order=people.map(p=>p.id);M.n=M.order.length;S.screen='view';render()}
 else load().then(render).catch(render);
 </script>
 </body>
