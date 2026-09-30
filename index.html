@@ -181,6 +181,40 @@ table.keys th{color:var(--dim);font-size:13px}.kq{font-weight:800}
 .mc{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-left:6px solid var(--cc);border-radius:16px;padding:12px 14px;text-align:left}
 .mcn{display:flex;flex-direction:column;min-width:0}.mcn b{font-size:17px}.mcn small{color:var(--dim);font-size:13px}
 .mct{margin-left:auto;text-align:right;font-weight:900;color:var(--cc);font-size:16px;white-space:nowrap}.mct small{display:block;color:var(--dim);font-weight:700;font-size:12px}
+/* host check (손들기 체크) */
+.hrow{display:flex;gap:10px;width:100%}.hrow .big-input{flex:1;min-width:0}
+.hnames{display:flex;flex-wrap:wrap;justify-content:center;gap:4px}
+.hchip{padding:8px 8px 8px 16px;font-size:17px}.hchip button{margin-left:4px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.12);font-size:13px}
+.hopts{display:flex;gap:12px}
+.hopt{flex:1;border-radius:18px;padding:14px 16px;color:#fff;font-weight:800;font-size:18px;line-height:1.4;display:flex;gap:12px;align-items:center}
+.hopt.A{background:linear-gradient(160deg,#ff5c7a,#b82a55)}.hopt.B{background:linear-gradient(160deg,#4d8dff,#2744b8)}
+.hopt .lab{font-size:34px;font-weight:900}.hopt b{margin-left:auto;font-size:24px;white-space:nowrap}
+.hgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.hp{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:10px 12px;display:flex;align-items:center;gap:10px}
+.hp.A{border-color:var(--a);background:rgba(255,92,122,.12)}.hp.B{border-color:var(--b);background:rgba(77,141,255,.12)}
+.hpn{flex:1;font-weight:800;font-size:18px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hpb{display:flex;gap:6px}.hpb button{width:54px;height:48px;border-radius:12px;background:var(--panel2);font-weight:900;font-size:20px;color:var(--dim)}
+.hpb .hA.on{background:var(--a);color:#fff}.hpb .hB.on{background:var(--b);color:#fff}
+/* teams (조 나누기) */
+.tmwrap{max-width:1150px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.mcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.mcard{background:var(--panel);border:2px solid var(--line);border-radius:20px;padding:16px 18px;text-align:left;display:flex;flex-direction:column;gap:6px;transition:transform .12s}
+.mcard:active{transform:scale(.97)}.mcard.on{border-color:#ffc93c;box-shadow:0 0 0 3px rgba(255,201,60,.25)}
+.mcard .mt{font-size:21px;font-weight:900}.mcard .mg{font-size:13px;font-weight:800;color:#ffc93c}.mcard .md{font-size:14px;color:var(--dim);line-height:1.55}.mcard .mp{font-size:13px;line-height:1.5}
+.lp{display:flex;flex-wrap:wrap;gap:8px}
+.lpb{display:inline-flex;align-items:center;gap:8px;padding:6px 14px 6px 6px;border-radius:99px;background:var(--panel2);border:2px solid transparent;font-weight:800;font-size:16px}
+.lpb.on{border-color:#ffc93c;background:rgba(255,201,60,.14)}.lpb small{color:var(--dim);font-weight:700}
+.tms{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tm{background:var(--panel);border:1px solid var(--line);border-top:6px solid var(--tc);border-radius:22px;padding:16px 18px}
+.tm h3{font-size:24px;font-weight:900;color:var(--tc)}.tm h3 small{font-size:15px;color:var(--dim);margin-left:6px}
+.tmc{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 10px}.tmc span{background:var(--panel2);border-radius:99px;padding:4px 10px;font-weight:800;font-size:14px}.tmc span.zero{opacity:.35}
+.tmm{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px dashed var(--line)}
+.tmm .nm{font-weight:800;font-size:17px}.tmm .ty{font-size:13px;color:var(--dim)}
+.tmm .bd{margin-left:auto;font-size:12px;font-weight:800;padding:3px 9px;border-radius:99px;background:rgba(255,201,60,.15);color:#ffc93c;white-space:nowrap}
+.tmwarn{margin-top:10px;font-size:14px;color:#ffb3c0;line-height:1.5}
+.tms.shuf .tmm{opacity:.55}
+@media (orientation:portrait){.hopts{flex-direction:column}}
+@media (orientation:portrait) and (max-width:700px){.tms{grid-template-columns:1fr}}
 @media (orientation:portrait){.collect{flex-direction:column;align-items:stretch}}
 @media (max-width:600px){.top{padding:12px 16px 6px}.screen{padding:6px 16px 20px}.card{min-height:120px;padding:18px;gap:8px}.card .lab{font-size:36px}.qtext{font-size:22px}.h2{font-size:24px}.big-input{font-size:24px}}
 </style>
@@ -278,23 +312,24 @@ function closeM(){$('#ov').classList.add('hidden');clearTimeout(slotTimer)}
 function confirmM(msg,ok,fn,danger){modal(`<div class="cf"><p>${msg}</p><div class="row"><button class="btn" onclick="closeM()">취소</button><button class="btn ${danger?'danger':'hi'}" id="cfok">${ok}</button></div></div>`);$('#cfok').onclick=()=>{closeM();fn()}}
 function slot(frame,final){clearTimeout(slotTimer);modal(`<div class="slot" id="slot"></div><div id="slotx"></div>`);let d=45,n=0;const step=()=>{const el=$('#slot');if(!el||$('#ov').classList.contains('hidden'))return;el.innerHTML=frame();n++;d*=1.085;if(n<20)slotTimer=setTimeout(step,d);else final()};step()}
 function topBar(title,back){if(PHONE||VIEW)return `<div class="top"><div class="title">${title}</div></div>`;return `<div class="top"><button class="back" onclick="${back||"go('home')"}">← 홈</button><div class="title">${title}</div><div class="pc">👥 ${people.length}명</div></div>`}
-function go(s){closeM();if(PHONE)s='respond';if(VIEW)s='view';S.screen=s;if(s==='respond')R={step:'name',name:'',photo:null,answers:[],i:0,replaceId:null};if(s==='map')syncMap();render()}
+function go(s){closeM();if(PHONE)s='respond';if(VIEW)s='view';S.screen=s;if(s==='respond')R={step:'name',name:'',photo:null,answers:[],i:0,replaceId:null};if(s==='map')syncMap();if(s==='hostcheck'&&(!H||H.step==='done'))newH();render()}
 
 let lastScr=null;
-function render(){const old=$('.screen'),keep=old&&lastScr===S.screen?old.scrollTop:0;let h='';switch(S.screen){case'view':h=vView();break;case'home':h=vHome();break;case'respond':h=vRespond();break;case'collect':h=vCollect();break;case'play':h=vPlay();break;case'map':h=vMap();break;case'chem':h=vChem();break;case'manage':h=vManage();break}
-$('#app').innerHTML=h;const nm=$('#nm');if(nm)nm.value=R.name;const cn=$('#cn');if(cn)cn.value=C.name;const cc=$('#cc');if(cc)cc.value=C.code;lastScr=S.screen;const sc=$('.screen');if(sc&&keep)sc.scrollTop=keep}
+function render(){const old=$('.screen'),keep=old&&lastScr===S.screen?old.scrollTop:0;let h='';switch(S.screen){case'view':h=vView();break;case'home':h=vHome();break;case'respond':h=vRespond();break;case'collect':h=vCollect();break;case'hostcheck':h=vHost();break;case'teams':h=vTeams();break;case'play':h=vPlay();break;case'map':h=vMap();break;case'chem':h=vChem();break;case'manage':h=vManage();break}
+$('#app').innerHTML=h;const nm=$('#nm');if(nm)nm.value=R.name;const cn=$('#cn');if(cn)cn.value=C.name;const cc=$('#cc');if(cc)cc.value=C.code;const hn=$('#hn');if(hn)hn.value=H.input;lastScr=S.screen;const sc=$('.screen');if(sc&&keep)sc.scrollTop=keep}
 
 /* HOME */
 function vHome(){const tiles=[
 ['collect','📱','휴대폰 응답 받기','QR로 다 같이 동시에 응답하고, 결과 코드로 등록해요','STEP 1','main'],
-['respond','✍️','아이패드로 직접 응답','휴대폰이 없는 분은 여기서 12문항에 답해요','STEP 1 (보조)',''],
+['hostcheck','🙋','진행자 손들기 체크','휴대폰 없이, 문항마다 손들기 결과를 진행자가 체크해요','STEP 1 (보조)',''],
 ['play','🎤','밸런스 게임 진행','문항을 크게 띄우고 손들기·자리 이동 + 랜덤 지목','STEP 2',''],
 ['map','🗺️','우리 팀 성향 지도','한 명씩 공개하며 4분면 지도를 완성해요','STEP 3',''],
 ['chem','💞','케미 매칭','환상의 콤비 · 시한폭탄 · 무소음 아지트','STEP 4',''],
+['teams','👥','조 나누기','3가지 기준으로 2개 조를 편성해요','STEP 5',''],
 ['manage','⚙️','참가자 관리','응답 목록 확인 · 삭제 · 테스트 데이터','관리자','']];
 return `<div class="screen"><div class="home"><div class="hero"><div class="badge">🏯 부여 워크샵</div><h1>업무 <span>밸런스 게임</span></h1><p>12문항으로 알아보는 우리 팀 성향 지도</p><div class="count">지금까지 <b>${people.length}</b>명 응답 완료</div></div>
 <div class="menu">${tiles.map(t=>`<button class="tile ${t[5]}" onclick="go('${t[0]}')"><span class="no">${t[4]}</span><span class="ic">${t[1]}</span><span class="tt">${t[2]}</span><span class="ds">${t[3]}</span></button>`).join('')}</div>
-<p class="flow">추천 진행: 휴대폰 응답(다 같이 동시에 3분) → 밸런스 게임 진행 → 성향 지도 공개 → 케미 매칭</p></div></div>`}
+<p class="flow">추천 진행: 휴대폰 응답(다 같이 동시에 3분) → 밸런스 게임 진행 → 성향 지도 공개 → 케미 매칭 → 조 나누기</p></div></div>`}
 
 /* RESPOND */
 function vRespond(){
@@ -348,7 +383,7 @@ return topBar('📱 휴대폰 응답 받기')+`<div class="screen"><div class="c
 <label class="photo-btn">${C.photo?`<img src="${C.photo}">`:'<span class="ph0">📷</span>'}<span>${C.photo?'사진 다시 찍기':'셀카 찍기 (선택)<br><small>성향 지도에 얼굴로 표시돼요</small>'}</span><input type="file" accept="image/*" capture="user" style="display:none" onchange="onPhoto(this)"></label>
 <button class="primary" onclick="addCode()">등록하기 ✓</button>
 <div class="reg"><div class="sh" style="margin-bottom:6px">등록 완료 ${people.length}명</div>${list.length?list.map(p=>`<span class="chip">${esc(p.name)}</span>`).join(''):'<span class="dimtxt">아직 없음</span>'}</div>
-<button class="btn" onclick="go('respond')">✍️ 휴대폰이 없는 분은 아이패드로 직접 응답</button></div></div></div>`}
+<button class="btn" onclick="go('hostcheck')">🙋 휴대폰 없이 진행자가 손들기로 체크</button></div></div></div>`}
 function addCode(){const n=(C.name||'').trim(),code=normCode(C.code||'');if(!n){toast('이름을 입력해 주세요 ✍️');return}
 const ans=decodeCode(code);if(!ans){toast('코드를 다시 확인해 주세요 🔍<br><small>3글자 · 0, 1, I, O는 쓰이지 않아요</small>',3000);return}
 const done=replaceId=>{addPerson(n,ans,C.photo,replaceId);C.name='';C.code='';C.photo=null;render();toast(`✅ <b>${esc(n)}</b> 등록 완료 (${people.length}명)`)};
@@ -359,6 +394,80 @@ function vView(){if(!people.length)return topBar('🏯 우리 팀 성향 지도'
 return topBar('🏯 부여 워크샵 · 우리 팀 성향 지도')+`<div class="screen"><div class="viewwrap">
 <div class="map-layout"><div class="map-main"><div class="map-box">${mapSVG(people)}</div><p class="dimtxt" style="text-align:center">👆 이름을 누르면 성향 카드가 열려요 · 총 ${people.length}명</p></div><div class="legend">${[1,2,3,4].map(k=>legendCard(k,people)).join('')}</div></div>
 <div id="chemsec" class="chem-wrap" style="margin-top:36px"><h2 class="h2" style="margin-bottom:18px">💞 케미 매칭</h2>${people.length<2?'<p class="hint">2명 이상일 때 볼 수 있어요.</p>':chemBody()}</div></div></div>`}
+
+/* HOSTCHECK (진행자가 이름 입력 후 문항별 손들기 결과 체크) */
+let H=null;
+function newH(){H={step:'names',names:[],input:'',i:0,ans:[]}}
+function hAdd(){const n=(H.input||'').trim();if(!n){toast('이름을 입력해 주세요 ✍️');return}if(H.names.includes(n)){toast('이미 추가된 이름이에요');return}
+H.names.push(n);H.ans.push(Array(12).fill(null));H.input='';render();const el=$('#hn');if(el)el.focus()}
+function hDel(i){H.names.splice(i,1);H.ans.splice(i,1);render()}
+function hStart(){if(!H.names.length)return;H.step='q';H.i=0;render()}
+function hSet(j,v){H.ans[j][H.i]=H.ans[j][H.i]===v?null:v;render()}
+function hAll(v){H.ans.forEach(a=>{if(!a[H.i])a[H.i]=v});render()}
+function hMove(d){if(d>0&&H.ans.some(a=>!a[H.i])){toast('아직 체크하지 않은 사람이 있어요');return}if(d>0&&H.i===11){hFinish();return}H.i=Math.max(0,Math.min(11,H.i+d));render()}
+function hQuit(){if(H.step==='q'){confirmM('체크를 그만둘까요?<br><small class="hint">지금까지 체크한 내용은 저장되지 않아요.</small>','그만두기',()=>{H=null;go('home')},true)}else{H=null;go('home')}}
+function hFinish(){const dup=H.names.filter(n=>people.some(p=>p.name===n));const save=()=>{H.names.forEach((n,j)=>{const ex=people.find(p=>p.name===n);addPerson(n,H.ans[j],null,ex?ex.id:null)});H.step='done';render()};
+if(dup.length){confirmM(`<b>${dup.map(esc).join(', ')}</b>님은 이미 응답이 있어요.<br>손들기 결과로 덮어쓸까요?`,'덮어쓰기',save);return}save()}
+function vHost(){
+if(H.step==='names')return topBar('🙋 진행자 손들기 체크','hQuit()')+`<div class="screen"><div class="center-col" style="max-width:760px"><div class="step-emoji">🙋</div><h2 class="h2">참가자 이름을 모두 입력해 주세요</h2><p class="hint">다음 화면부터 문항마다 손들기 결과를 체크해요</p>
+<div class="hrow"><input id="hn" class="big-input" placeholder="이름 입력 → 추가" maxlength="12" autocomplete="off" oninput="H.input=this.value" onkeydown="if(event.key==='Enter')hAdd()"><button class="primary sm" onclick="hAdd()">추가</button></div>
+<div class="hnames">${H.names.map((n,i)=>`<span class="chip hchip">${esc(n)}<button onclick="hDel(${i})">✕</button></span>`).join('')||'<span class="dimtxt">아직 없음</span>'}</div>
+<button class="primary" onclick="hStart()" ${H.names.length?'':'disabled'}>${H.names.length}명으로 Q1 시작 →</button></div></div>`;
+if(H.step==='q'){const q=Q[H.i],cnt=v=>H.ans.filter(a=>a[H.i]===v).length,left=H.ans.filter(a=>!a[H.i]).length;
+return topBar('🙋 손들기 체크','hQuit()')+`<div class="screen"><div class="qwrap">
+<div class="qmeta"><span class="part">PART ${q.p+1} · ${PARTS[q.p]}</span><span>Q${H.i+1} / 12</span></div>
+<div class="prog"><div style="width:${(H.i+1)/12*100}%"></div></div>
+<h2 class="qtext">${esc(q.t)}</h2>
+<div class="hopts"><div class="hopt A"><span class="lab">A</span><span>${esc(q.a)}</span><b>${cnt('A')}명</b></div><div class="hopt B"><span class="lab">B</span><span>${esc(q.b)}</span><b>${cnt('B')}명</b></div></div>
+<div class="hgrid">${H.names.map((n,j)=>{const v=H.ans[j][H.i];return `<div class="hp ${v||''}"><div class="hpn">${esc(n)}</div><div class="hpb"><button class="hA ${v==='A'?'on':''}" onclick="hSet(${j},'A')">A</button><button class="hB ${v==='B'?'on':''}" onclick="hSet(${j},'B')">B</button></div></div>`}).join('')}</div>
+<div class="pbar"><button class="btn" onclick="hAll('A')" ${left?'':'disabled'}>남은 ${left}명 전부 A</button><button class="btn" onclick="hAll('B')" ${left?'':'disabled'}>남은 ${left}명 전부 B</button></div>
+<div class="qnav"><button class="btn" onclick="hMove(-1)" ${H.i===0?'disabled':''}>← 이전 문항</button><button class="primary sm" onclick="hMove(1)" ${left?'disabled':''}>${left?`${left}명 남음`:H.i===11?'완료 · 저장 ✓':'다음 문항 →'}</button></div></div></div>`}
+return topBar('🙋 진행자 손들기 체크')+`<div class="screen"><div class="center-col"><div class="step-emoji big">🎉</div><h2 class="h2">${H.names.length}명 응답 저장 완료!</h2><p class="hint" style="font-size:18px">지금까지 총 ${people.length}명 응답</p>
+<div class="row"><button class="primary" onclick="go('map')">🗺️ 성향 지도로</button><button class="btn" onclick="go('home')">홈으로</button></div></div></div>`}
+
+/* TEAMS (STEP 5: 2개 조 편성) */
+const G={m:0,t:null,lead:[],anim:false};
+const TM=[null,
+{emo:'⚖️',title:'밸런스 믹스',tag:'황금 비율 기준 · 가장 추천',desc:`각 팀에 ${T[1].name}·${T[2].name}·${T[3].name}·${T[4].name}가 골고루 섞이도록 배치해요. 한 분면에 몰리면 점수가 인접 분면에 가까운 사람에게 부족한 역할을 맡겨요.`,pro:'협동 미션에서 한쪽이 압도적으로 유리해지는 걸 막고, 두 팀 모두 역할 분담이 완성돼요.'},
+{emo:'🔥',title:'상극 대결',tag:'예능/대결 기준 · 드라마틱한 재미',desc:`과업·원칙 중심(${T[1].name}+${T[4].name})은 A팀, 유연·관계 중심(${T[2].name}+${T[3].name})은 B팀으로 모아 컨셉 대결을 만들어요.`,pro:'A팀은 시간 단축에 목숨 걸고, B팀은 사진 예쁘게 찍느라 여유 부리는 티격태격 케미!'},
+{emo:'🪜',title:'팀장 지명 + 사다리',tag:'현실 타협 기준 · 가장 속 편한',desc:`${T[1].name} 2명을 1팀·2팀 팀장으로 먼저 지명하고, 나머지는 사다리타기로 랜덤하게 나눠요.`,pro:'민주적이면서도 양 팀에 리더가 1명씩 있어 진행이 매끄러워요.'}];
+const TCOL=['#ff5c7a','#4d8dff'];
+/* 목표 분면 k까지 얼마나 가까운지 (0=이미 그 분면, 점수가 0에 가까울수록 작음) */
+function distTo(p,k){const {x,y}=score(p.answers),sx=k===1||k===4?1:-1,sy=k===1||k===2?1:-1;return (Math.sign(x)===sx?0:Math.abs(x)+1)+(Math.sign(y)===sy?0:Math.abs(y)+1)}
+function mem(p,extra){return Object.assign({id:p.id,role:quad(p),tag:null},extra||{})}
+function splitBalance(){let best=null;
+for(let t=0;t<300;t++){const tm=[[],[]];let flip=Math.random()<.5?1:0;
+[1,2,3,4].map(k=>shuffle(people.filter(p=>quad(p)===k))).sort((a,b)=>b.length-a.length).forEach(g=>g.forEach(p=>{const a=tm[0].length,b=tm[1].length;tm[a<b?0:b<a?1:(flip^=1)].push(p)}));
+const sc=[1,2,3,4].reduce((s,k)=>s+Math.abs(tm[0].filter(p=>quad(p)===k).length-tm[1].filter(p=>quad(p)===k).length),0);
+if(!best||sc<best.sc)best={sc,tm}}
+return best.tm.map(team=>{const ms=team.map(p=>mem(p));
+[1,2,3,4].forEach(k=>{if(ms.some(m=>m.role===k))return;const c=ms.filter(m=>!m.tag&&ms.filter(x=>x.role===m.role).length>=2).sort((a,b)=>distTo(byId(a.id),k)-distTo(byId(b.id),k))[0];if(c){c.from=c.role;c.role=k;c.tag='shift'}});return ms})}
+function splitClash(){const A=[],B=[];people.forEach(p=>{const q=quad(p);(q===1||q===4?A:B).push({p,x:score(p.answers).x})});
+while(Math.abs(A.length-B.length)>2){const [big,small]=A.length>B.length?[A,B]:[B,A];big.sort((a,b)=>Math.abs(a.x)-Math.abs(b.x));const o=big.shift();o.merc=true;small.push(o)}
+return [A,B].map(g=>shuffle(g).map(o=>mem(o.p,o.merc?{tag:'merc'}:null)))}
+function splitLadder(){const L=G.lead.map(byId);const rest=shuffle(people.filter(p=>!G.lead.includes(p.id)));const tm=[[mem(L[0],{tag:'lead'})],[mem(L[1],{tag:'lead'})]];rest.forEach((p,i)=>tm[i%2].push(mem(p)));return tm}
+function teamNames(m){return m===1?['⚖️ 1팀','⚖️ 2팀']:m===2?['🏆 A팀 · 결과 지상주의','📸 B팀 · 분위기·과정 중시']:G.lead.map(id=>`👑 ${byId(id).name} 팀`)}
+function defaultLeaders(){return people.slice().sort((a,b)=>distTo(a,1)-distTo(b,1)||(()=>{const s=p=>{const v=score(p.answers);return v.x+v.y};return s(b)-s(a)})()).slice(0,2).map(p=>p.id)}
+function pickMethod(m){if(G.anim)return;G.m=m;G.t=null;if(m===3){G.lead=G.lead.filter(id=>byId(id));if(G.lead.length<2)G.lead=defaultLeaders();render()}else drawTeams()}
+function toggleLead(id){const i=G.lead.indexOf(id);if(i>=0)G.lead.splice(i,1);else{G.lead.push(id);if(G.lead.length>2)G.lead.shift()}G.t=null;render()}
+function drawTeams(){if(G.anim||!G.m)return;if(G.m===3&&G.lead.length<2){toast('팀장 2명을 골라 주세요 👑');return}
+const fin=G.m===1?splitBalance():G.m===2?splitClash():splitLadder();const names=teamNames(G.m);G.anim=true;let n=0;
+const tick=()=>{if(S.screen!=='teams'){G.anim=false;return}if(n<14){const lead=G.m===3?G.lead:[];const sh=shuffle(people.filter(p=>!lead.includes(p.id)));const tm=G.m===3?[[mem(byId(lead[0]),{tag:'lead'})],[mem(byId(lead[1]),{tag:'lead'})]]:[[],[]];sh.forEach((p,i)=>tm[i%2].push(mem(p)));G.t={names,teams:tm,tmp:true};n++;render();setTimeout(tick,70+n*14)}
+else{G.anim=false;G.t={names,teams:fin};render();toast('🎉 조 편성 완료!')}};tick()}
+function teamCard(i){const {names,teams,tmp}=G.t,ms=teams[i];const cnt=k=>ms.filter(m=>m.role===k).length;const miss=[1,2,3,4].filter(k=>!cnt(k));
+const badge=m=>m.tag==='lead'?'👑 팀장':m.tag==='shift'?`🔄 ${T[m.role].name} 역할`:m.tag==='merc'?'🔀 용병 (경계형)':'';
+return `<div class="tm" style="--tc:${TCOL[i]}"><h3>${esc(names[i])}<small>${ms.length}명</small></h3><div class="tmc">${[1,2,3,4].map(k=>`<span class="${cnt(k)?'':'zero'}">${T[k].emo} ${T[k].name} ${cnt(k)}</span>`).join('')}</div>
+${ms.map(m=>{const p=byId(m.id),t=T[quad(p)];return `<div class="tmm">${avatar(p)}<div><div class="nm">${esc(p.name)}</div><div class="ty">${t.emo} ${t.name}${m.tag==='shift'?` → ${T[m.role].emo} ${T[m.role].name}`:''}</div></div>${badge(m)?`<span class="bd">${badge(m)}</span>`:''}</div>`}).join('')}
+${!tmp&&G.m!==2&&miss.length?`<div class="tmwarn">⚠️ 이 팀엔 ${miss.map(k=>T[k].emo+' '+T[k].name).join(', ')}가 없어요 — 누가 그 역할을 맡을지 정해 보세요</div>`:''}</div>`}
+function vTeams(){if(people.length<2)return topBar('👥 조 나누기')+`<div class="screen"><div class="center-col"><div class="step-emoji">👥</div><h2 class="h2">응답이 2명 이상 필요해요</h2><button class="primary" onclick="go('collect')">📱 휴대폰 응답 받기</button></div></div>`;
+const ids=new Set(people.map(p=>p.id));if(G.t&&G.t.teams.some(t=>t.some(m=>!ids.has(m.id)))||G.t&&G.t.teams.flat().length!==people.length)G.t=null;
+const lp=G.m===3?`<div class="reg"><div class="sh" style="margin-bottom:8px">👑 팀장 2명 지명 <small class="dimtxt">(${T[1].name} 우선 · 눌러서 바꾸기)</small></div><div class="lp">${people.slice().sort((a,b)=>distTo(a,1)-distTo(b,1)).map(p=>{const t=T[quad(p)],on=G.lead.includes(p.id);return `<button class="lpb ${on?'on':''}" onclick="toggleLead('${p.id}')">${avatar(p)}${on?'👑 ':''}${esc(p.name)} <small>${t.emo} ${t.name}</small></button>`}).join('')}</div></div>`:'';
+return topBar('👥 조 나누기')+`<div class="screen"><div class="tmwrap">
+<div class="mcards">${[1,2,3].map(k=>{const m=TM[k];return `<button class="mcard ${G.m===k?'on':''}" onclick="pickMethod(${k})"><span class="mg">${k}. ${m.tag}</span><span class="mt">${m.emo} ${m.title}</span><span class="md">${m.desc}</span><span class="mp">👍 ${m.pro}</span></button>`}).join('')}</div>
+${G.m?'':'<p class="hint" style="text-align:center">위에서 조 나누기 기준을 골라 주세요</p>'}${lp}
+${G.m===3&&!G.t?`<div class="row" style="margin-top:0"><button class="primary" onclick="drawTeams()" ${G.lead.length<2?'disabled':''}>🪜 사다리 타기!</button></div>`:''}
+${G.t?`<div class="tms ${G.t.tmp?'shuf':''}">${teamCard(0)}${teamCard(1)}</div><div class="row" style="margin-top:0"><button class="btn hi" onclick="drawTeams()" ${G.anim?'disabled':''}>🔀 다시 나누기</button></div>`:''}
+</div></div>`}
 
 /* PLAY */
 function pcard(k,txt,n,side){const l=k.toLowerCase();return `<div class="card ${k}"><span class="lab">${k}</span><span class="txt">${esc(txt)}</span><span class="side">${side}</span><div class="tally"><button onclick="tally('${l}',-1)">−</button><span>${n}<small>명</small></span><button onclick="tally('${l}',1)">+</button></div></div>`}
@@ -402,7 +511,7 @@ items.forEach(({p,x,y,label})=>{const hx=T[quad(p)].hex;const ph=photos[p.id];
 s+=`<g transform="translate(${x.toFixed(1)},${y.toFixed(1)})" class="pp" onclick="personCard('${p.id}')"><g class="${M.last===p.id?'pop':''}">${M.last===p.id?`<circle r="30" fill="none" stroke="${hx}" stroke-width="3" opacity=".7"/>`:''}<circle r="21" fill="${hx}" stroke="#fff" stroke-width="3"/>${ph?`<image href="${ph}" x="-19" y="-19" width="38" height="38" clip-path="url(#cp${p.id})" preserveAspectRatio="xMidYMid slice"/>`:`<text y="5" text-anchor="middle" font-size="13" font-weight="900" fill="#16132a">${esc(short(p.name))}</text>`}${label?`<text y="39" text-anchor="middle" font-size="14" font-weight="800" fill="#fff" stroke="#0f0d1a" stroke-width="4" paint-order="stroke">${esc(p.name)}</text>`:''}</g></g>`});
 if(!vis.length)s+=`<rect x="190" y="430" width="420" height="56" rx="16" fill="#262245" stroke="#3a3563"/><text x="400" y="465" text-anchor="middle" font-size="18" font-weight="800" fill="#f4f2ff">❓ 위 버튼을 눌러 한 명씩 공개하세요</text>`;
 return s+'</svg>'}
-function vMap(){if(!people.length)return topBar('🗺️ 우리 팀 성향 지도')+`<div class="screen"><div class="center-col"><div class="step-emoji">🗺️</div><h2 class="h2">아직 응답이 없어요</h2><p class="hint">개인 응답을 먼저 받아 주세요.</p><button class="primary" onclick="go('respond')">✍️ 개인 응답 시작</button></div></div>`;
+function vMap(){if(!people.length)return topBar('🗺️ 우리 팀 성향 지도')+`<div class="screen"><div class="center-col"><div class="step-emoji">🗺️</div><h2 class="h2">아직 응답이 없어요</h2><p class="hint">개인 응답을 먼저 받아 주세요.</p><button class="primary" onclick="go('collect')">📱 휴대폰 응답 받기</button></div></div>`;
 const shown=new Set(M.order.slice(0,M.n));const vis=people.filter(p=>shown.has(p.id));
 return topBar('🗺️ 우리 팀 성향 지도')+`<div class="screen mapscr"><div class="map-layout"><div class="map-main"><div class="map-ctrl"><button class="primary sm" onclick="revealNext()" ${M.n>=M.order.length?'disabled':''}>🎲 한 명씩 공개<span class="cnt">${M.n}/${M.order.length}</span></button><button class="btn" onclick="revealAll()">전체 공개</button><button class="btn" onclick="hideAll()">숨기기</button>${M.n>=M.order.length?'<button class="btn hi" onclick="shareMap()">🔗 팀원들에게 공유</button>':''}</div>
 <div class="map-box">${mapSVG(vis)}</div></div><div class="legend">${[1,2,3,4].map(k=>legendCard(k,vis)).join('')}</div></div></div>`}
@@ -428,7 +537,7 @@ ${axisBar('X축 · 업무 성향',sc.x,'유연·관계','원칙·과업')}${axis
 
 /* CHEM */
 function chemKey(a,b){const k=[a,b].sort().join('');return k==='12'?'combo':(k==='13'||k==='24')?'bomb':k==='34'?'zone':'none'}
-function vChem(){if(people.length<2)return topBar('💞 케미 매칭')+`<div class="screen"><div class="center-col"><div class="step-emoji">💞</div><h2 class="h2">응답이 2명 이상 필요해요</h2><button class="primary" onclick="go('respond')">✍️ 개인 응답 시작</button></div></div>`;
+function vChem(){if(people.length<2)return topBar('💞 케미 매칭')+`<div class="screen"><div class="center-col"><div class="step-emoji">💞</div><h2 class="h2">응답이 2명 이상 필요해요</h2><button class="primary" onclick="go('collect')">📱 휴대폰 응답 받기</button></div></div>`;
 return topBar('💞 케미 매칭')+`<div class="screen"><div class="chem-wrap">${chemBody()}</div></div>`}
 function chemBody(){const opts=(sel,ph)=>`<option value="">${ph||'선택'}</option>`+people.map(p=>`<option value="${p.id}" ${sel===p.id?'selected':''}>${esc(p.name)}</option>`).join('');
 return `<h3 class="sec">🙋 나의 케미 <small>내 이름을 고르면 모든 팀원과의 케미가 나와요</small></h3>
